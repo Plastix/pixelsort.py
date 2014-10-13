@@ -42,6 +42,16 @@ def sort_by_npx(image, numpx=50):
             data[i + k] = section[k]
     image.putdata(data)  # Push the sorted data back to the original image
 
+def sort_by_sumrgb(image):
+    """
+    Sorts by the sum of red, green, and blue values of the pixels
+    """
+    data = list(image.getdata())
+    sort = sorted([(sum(i), i) for i in data])
+    for i in range(len(sort)):
+        data[i] = sort[i][1]
+    image.putdata(data)
+
 
 if __name__ == '__main__':
     image = Image.open('yukon.jpg')
