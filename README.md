@@ -13,7 +13,6 @@ pip install numpy
 ```
 brew tap homebrew/science
 brew install opencv
-
 ```
 Then link the Python files
 ```

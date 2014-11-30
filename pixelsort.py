@@ -3,6 +3,7 @@
 import cv2
 import numpy
 import time
+import sys
 
 
 def sort_by_row(image):
@@ -61,10 +62,15 @@ def sort_by_sumrgb(image):
 
 
 if __name__ == '__main__':
-    image = cv2.imread('yukon.jpg')
+    if len(sys.argv) > 1:
+        filename = sys.argv[1]
+    else:
+        filename = "Lenna.png"
+    image = cv2.imread(filename)
     start = time.clock()
     image = sort_by_npx(image)
     end = time.clock()
     elapsed = '%.2f' % (end - start)
     print 'Image Sorted in ' + elapsed + ' seconds!'
-    cv2.imwrite('output.jpg', image)
+    name = filename.split('.')
+    cv2.imwrite(name[0] + '_output' + '.' + name[1], image)
