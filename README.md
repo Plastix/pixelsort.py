@@ -3,6 +3,8 @@ pixelsort.py
 
 Pixel sorting experiments written in Python (2.7)
 
+![Lenna N-Pixel Sort](https://raw.githubusercontent.com/Plastix/pixelsort.py/master/examples/Lenna_npx.png)
+
 ## Dependencies
 I would highly recommend creating a virtualenv and installing the following depenencies on that
 * [NumPy](http://www.numpy.org/): Install NumPy through Pip with
