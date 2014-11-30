@@ -3,19 +3,18 @@
 import cv2
 import click
 import sorts
-# import time
-# import sys
+import time
 
 
 @click.group()
-# TODO: Change these to filepath arguments later
-@click.option('--src', nargs=1, default="Lenna.png", help="File to pixelsort")
+@click.option('--src', nargs=1, default="Lenna.png", help="File to pixelsort", type=click.Path(exists=True))
 @click.option('--out', nargs=1, default="output.png", help="File to output")
 @click.pass_context
 def pixelsort(ctx, src, out):
     """Sort pixels from the CLI"""
     ctx.obj['src'] = cv2.imread(src)
     ctx.obj['out'] = out
+    ctx.obj['start'] = time.clock()
 
 
 @click.command()
@@ -23,7 +22,7 @@ def pixelsort(ctx, src, out):
 def column(ctx):
     """Sorts each column of the image"""
     sort = sorts.sort_by_column(ctx.obj['src'])
-    save_image(ctx.obj['out'], sort)
+    save_image(ctx.obj['out'], sort, ctx.obj['start'])
 
 
 @click.command()
@@ -31,7 +30,7 @@ def column(ctx):
 def row(ctx):
     """Sorts each row of the image"""
     sort = sorts.sort_by_row(ctx.obj['src'])
-    save_image(ctx.obj['out'], sort)
+    save_image(ctx.obj['out'], sort, ctx.obj['start'])
 
 
 @click.command()
@@ -40,12 +39,13 @@ def row(ctx):
 def npixel(ctx, numpx):
     """Sorts every N-pixels of the image"""
     sort = sorts.sort_by_npx(ctx.obj['src'], numpx)
-    save_image(ctx.obj['out'], sort)
+    save_image(ctx.obj['out'], sort, ctx.obj['start'])
 
 
-def save_image(filename, data):
+def save_image(filename, data, start):
     cv2.imwrite(filename, data)
-    print 'Sorted image!'
+    ellapsed = time.clock() - start
+    print 'Sorted image in %.2f seconds!' % ellapsed
 
 
 pixelsort.add_command(row)
@@ -54,15 +54,3 @@ pixelsort.add_command(npixel)
 
 if __name__ == '__main__':
     pixelsort(obj={})
-    # if len(sys.argv) > 1:
-    #     filename = sys.argv[1]
-    # else:
-    #     filename = "Lenna.png"
-    # image = cv2.imread(filename)
-    # start = time.clock()
-    # image = sorts.sort_by_npx(image)
-    # end = time.clock()
-    # elapsed = '%.2f' % (end - start)
-    # print 'Image Sorted in ' + elapsed + ' seconds!'
-    # name = filename.split('.')
-    # cv2.imwrite(name[0] + '_output' + '.' + name[1], image)
