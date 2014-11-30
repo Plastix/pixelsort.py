@@ -41,6 +41,13 @@ def npixel(ctx, numpx):
     sort = sorts.sort_by_npx(ctx.obj['src'], numpx)
     save_image(ctx.obj['out'], sort, ctx.obj['start'])
 
+@click.command()
+@click.pass_context
+def sumrgb(ctx):
+    """Sorts by sum of the RGB channels"""
+    sort = sorts.sort_by_sumrgb(ctx.obj['src'])
+    save_image(ctx.obj['out'], sort, ctx.obj['start'])
+
 
 def save_image(filename, data, start):
     cv2.imwrite(filename, data)
@@ -51,6 +58,7 @@ def save_image(filename, data, start):
 pixelsort.add_command(row)
 pixelsort.add_command(column)
 pixelsort.add_command(npixel)
+pixelsort.add_command(sumrgb)
 
 if __name__ == '__main__':
     pixelsort(obj={})
