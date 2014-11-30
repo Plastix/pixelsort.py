@@ -17,7 +17,7 @@ def sort_by_column(image):
     return numpy.sort(image, axis=0)
 
 
-def sort_by_npx(image, numpx=50):
+def sort_by_npx(image, numpx):
     """
     Splits the image into segments of N pixels and sorts each one
     Returns the sorted image.
