@@ -54,7 +54,7 @@ def sumrgb(ctx):
 def save_image(filename, data, start):
     cv2.imwrite(filename, data)
     ellapsed = time.clock() - start
-    print 'Sorted image in %.2f seconds!' % ellapsed
+    click.secho('Sorted image in %.2f seconds!' % ellapsed, fg='green')
 
 
 cli.add_command(row)
