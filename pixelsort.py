@@ -18,7 +18,7 @@ def cli(ctx, src, out):
     ctx.obj['start'] = time.clock()
 
 
-@click.command()
+@cli.command()
 @click.pass_context
 def column(ctx):
     """Sorts each column of the image"""
@@ -26,7 +26,7 @@ def column(ctx):
     save_image(ctx.obj['out'], sort, ctx.obj['start'])
 
 
-@click.command()
+@cli.command()
 @click.pass_context
 def row(ctx):
     """Sorts each row of the image"""
@@ -34,7 +34,7 @@ def row(ctx):
     save_image(ctx.obj['out'], sort, ctx.obj['start'])
 
 
-@click.command()
+@cli.command()
 @click.argument('numpx', nargs=1, type=click.INT, metavar="<Number of Pixels>", default=50)
 @click.pass_context
 def npixel(ctx, numpx):
@@ -43,7 +43,7 @@ def npixel(ctx, numpx):
     save_image(ctx.obj['out'], sort, ctx.obj['start'])
 
 
-@click.command()
+@cli.command()
 @click.pass_context
 def sumrgb(ctx):
     """Sorts by sum of the RGB channels"""
@@ -56,11 +56,6 @@ def save_image(filename, data, start):
     ellapsed = time.clock() - start
     click.secho('Sorted image in %.2f seconds!' % ellapsed, fg='green')
 
-
-cli.add_command(row)
-cli.add_command(column)
-cli.add_command(npixel)
-cli.add_command(sumrgb)
 
 if __name__ == '__main__':
     # Pass in a dictionary object to save the context
