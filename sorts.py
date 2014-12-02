@@ -51,6 +51,8 @@ def sort_by_sumrgb(image):
     """
     flat = numpy.reshape(image, (-1, 1, image.shape[2])).squeeze()
     sums = numpy.sum(flat, axis=1).reshape((-1, 1))
+    # Sorts using the Decorate-Sort-Undecorate idiom
+    # hstack puts the sum element first
     sort = numpy.sort(numpy.hstack((sums, flat)), axis=0)
     final = numpy.delete(sort, numpy.s_[:1:1], axis=1)
     return numpy.reshape(final, image.shape)

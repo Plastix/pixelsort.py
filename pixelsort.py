@@ -61,4 +61,5 @@ pixelsort.add_command(npixel)
 pixelsort.add_command(sumrgb)
 
 if __name__ == '__main__':
+    #Pass in a dictionary object to save the context
     pixelsort(obj={})
