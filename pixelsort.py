@@ -7,7 +7,8 @@ import time
 
 
 @click.group()
-@click.option('--src', nargs=1, default="Lenna.png", help="File to pixelsort", type=click.Path(exists=True))
+@click.option('--src', nargs=1, default="Lenna.png",
+              help="File to pixelsort", type=click.Path(exists=True))
 @click.option('--out', nargs=1, default="output.png", help="File to output")
 @click.version_option(version=0.1)
 @click.pass_context
@@ -35,7 +36,8 @@ def row(ctx):
 
 
 @cli.command()
-@click.argument('numpx', nargs=1, type=click.INT, metavar="<Number of Pixels>", default=50)
+@click.argument('numpx', nargs=1, type=click.INT,
+                metavar="<Number of Pixels>", default=50)
 @click.pass_context
 def npixel(ctx, numpx):
     """Sorts every N-pixels of the image"""
