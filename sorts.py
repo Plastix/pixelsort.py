@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import numpy
+import click
+
 
 def sort_by_row(image):
     """
@@ -55,4 +57,20 @@ def sort_by_sumrgb(image):
     sums = numpy.sum(image, axis=2).flatten()
     # Calculate sort indicies then sort by them
     sort_indices = numpy.argsort(sums)
+    return flat[sort_indices].reshape(image.shape)
+
+
+def sort_by_chan(image, chan):
+    """
+    Sorts by the specified channel
+    Returns the sorted image.
+    """
+    if chan > image.shape[2] - 1:
+        raise click.BadParameter('Image does not have %s channels!' % chan)
+    # Reshape to 2D array
+    flat = numpy.reshape(image, (-1, 1, image.shape[2])).squeeze()
+    # Get specified Channel
+    channel = image[:, :, chan].flatten()
+    # Calculate sort indicies then sort by them
+    sort_indices = numpy.argsort(channel)
     return flat[sort_indices].reshape(image.shape)

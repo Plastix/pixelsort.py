@@ -53,6 +53,15 @@ def sumrgb(ctx):
     sort = sorts.sort_by_sumrgb(ctx.obj['i'])
     save_image(ctx.obj['o'], sort, ctx.obj['start'])
 
+@cli.command()
+@click.argument('chan', nargs=1, type=click.INT,
+                metavar="<Channel #>", default=0)
+@click.pass_context
+def chan(ctx, chan):
+    """Sorts by the specified color channel."""
+    sort = sorts.sort_by_chan(ctx.obj['i'], chan)
+    save_image(ctx.obj['o'], sort, ctx.obj['start'])
+
 
 def save_image(filename, data, start):
     cv2.imwrite(filename, data)
