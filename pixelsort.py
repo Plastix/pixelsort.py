@@ -7,9 +7,9 @@ import time
 
 
 @click.group()
-@click.option('--src', nargs=1, default="Lenna.png",
+@click.option('-i', "--input", nargs=1, default="Lenna.png",
               help="File to pixelsort", type=click.Path(exists=True))
-@click.option('--out', nargs=1, default="output.png", help="File to output")
+@click.option('-o', "--output", nargs=1, default="output.png", help="File to output")
 @click.version_option(version=0.1)
 @click.pass_context
 def cli(ctx, src, out):
